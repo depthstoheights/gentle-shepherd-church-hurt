@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gentle Shepherd — Church Hurt & Spiritual Abuse (Depths to Heights)</title>
+<meta name="description" content="A pastoral, trauma-sensitive app for survivors of church hurt & spiritual abuse: healing plan, safety & boundaries, red/green flags, Scriptural truth replacements, and resources. Single-file, runs offline.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/200/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%232dd4bf'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='12' fill='url(%23g)'/%3E%3Ctext x='50%25' y='58%25' font-family='Georgia' font-weight='900' font-size='26' text-anchor='middle' fill='%230b0b0b'%3EGS%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --paper:#fffcf5;      /* warm parchment */
+    --ink:#1a1a16;
+    --muted:#5f665f;
+    --line:#eadfcb;
+    --card:#ffffff;
+    --lav:#a78bfa;        /* lavender */
+    --teal:#2dd4bf;       /* teal */
+    --rose:#fb7185;       /* soft coral */
+    --gold:#fde68a;       /* golden cream */
+    --deep:#355a66;       /* slate teal */
+    --shadow:0 16px 48px rgba(0,0,0,.14);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--ink); background:
+      radial-gradient(1200px 700px at 110% -10%, rgba(167,139,250,.18), transparent 60%),
+      radial-gradient(900px 600px at -10% -10%, rgba(45,212,191,.18), transparent 60%),
+      var(--paper);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    line-height:1.65;
+  }
+
+  /* Topbar */
+  .topbar{position:sticky; top:0; z-index:50; backdrop-filter:blur(8px) saturate(130%); background:rgba(255,255,255,.78); border-bottom:1px solid var(--line)}
+  .top-inner{max-width:980px; margin:0 auto; padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px}
+  .brand{display:flex; gap:12px; align-items:center}
+  .logo{width:44px; height:44px; border-radius:14px; display:grid; place-items:center; font-weight:900; color:#0b0b0b; background:conic-gradient(from 200deg, var(--lav), var(--teal), var(--gold), var(--rose), var(--lav)); box-shadow:inset 0 0 0 2px #0b0b0b14}
+  h1{margin:0; font-size:1.1rem}
+  .sub{color:var(--muted); font-size:.95rem}
+  .actions{display:flex; gap:8px; align-items:center}
+  .icon-btn{border:1px solid var(--line); background:#fff; color:var(--ink); padding:8px 10px; border-radius:12px; cursor:pointer; font-weight:800; display:inline-flex; align-items:center; gap:8px}
+  .icon-btn[aria-pressed="true"]{background:linear-gradient(135deg, var(--lav), var(--teal)); color:#0b0b0b; border-color:transparent}
+
+  /* Layout */
+  main{max-width:980px; margin:0 auto; padding:16px; padding-bottom:100px}
+  .screen{display:none}
+  .screen.active{display:block}
+
+  /* Cards & panels */
+  .panel{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:14px; box-shadow:var(--shadow)}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:22px; padding:14px}
+  .cards{display:grid; gap:14px; grid-template-columns:repeat(2, minmax(0,1fr))}
+  @media (max-width:820px){.cards{grid-template-columns:1fr}}
+  .tag{display:inline-block; padding:2px 8px; border-radius:999px; background:#eef2ff; color:#4338ca; font-weight:800; font-size:.75rem}
+  .btn{border:0; padding:10px 12px; border-radius:12px; cursor:pointer; font-weight:900; background:linear-gradient(135deg, var(--lav), var(--teal)); color:#0b0b0b}
+  .btn.ghost{background:transparent; border:1px solid var(--line); color:var(--ink)}
+  .btn.rose{background:linear-gradient(135deg, var(--rose), var(--gold)); color:#0b0b0b}
+  .btn.teal{background:linear-gradient(135deg, var(--teal), #b9f6ec); color:#0b0b0b}
+  .btn.lav{background:linear-gradient(135deg, var(--lav), #d9d0ff); color:#0b0b0b}
+  .btn.tiny{padding:7px 10px; font-size:.9rem}
+  .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; font-weight:800; font-size:.85rem; background:#fff; border:1px solid var(--line)}
+  .caps{letter-spacing:.05em; text-transform:uppercase; font-weight:900; font-size:.8rem; color:#6b7280}
+  .muted{color:var(--muted)}
+  .grid-2{display:grid; gap:12px; grid-template-columns:repeat(2, minmax(0,1fr))}
+  @media (max-width:740px){.grid-2{grid-template-columns:1fr}}
+  textarea,input,select{width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--line); background:#fffdf8; color:#1a1a16; outline:none}
+  textarea{min-height:100px; resize:vertical}
+  .list{display:flex; flex-direction:column; gap:10px; margin-top:8px}
+  .item{display:flex; flex-direction:column; gap:6px; border:1px solid var(--line); background:#fffefb; border-radius:12px; padding:10px}
+  .meta{font-size:.9rem; color:var(--muted)}
+
+  /* Bottom nav */
+  .bottom-nav{position:fixed; left:0; right:0; bottom:0; z-index:60; background:rgba(255,255,255,.92); border-top:1px solid var(--line); backdrop-filter:blur(6px)}
+  .nav-inner{max-width:980px; margin:0 auto; padding:8px 12px; display:flex; gap:6px}
+  .nav-btn{flex:1; border:1px solid var(--line); background:#fff; color:#1a1a16; border-radius:14px; padding:10px 6px; display:flex; flex-direction:column; align-items:center; gap:6px; cursor:pointer; font-weight:800; font-size:.85rem}
+  .nav-btn.active{background:linear-gradient(135deg, var(--lav), var(--teal)); color:#0b0b0b; border-color:transparent}
+  .nav-icon{font-size:1.1rem}
+
+  /* Modal sheet */
+  .modal{position:fixed; inset:0; display:none; align-items:flex-end; justify-content:center; z-index:70; background:rgba(0,0,0,.45)}
+  .modal.show{display:flex}
+  .sheet{width:100%; max-width:720px; max-height:85vh; overflow:auto; background:#fff; border:1px solid var(--line); border-radius:20px 20px 0 0; padding:16px 14px 100px}
+  .sheet h3{margin:.25rem 0 .5rem}
+  .sheet .close{position:sticky; top:0; display:flex; justify-content:flex-end}
+  .close .btn{background:#fff; color:#1a1a16}
+
+  /* Progress bar */
+  .progress{height:12px; border-radius:999px; background:#fff; border:1px solid var(--line); overflow:hidden}
+  .bar{height:100%; width:0%; background:linear-gradient(90deg, var(--lav), var(--teal)); transition:width .3s ease}
+
+  /* Toast */
+  .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:78px; z-index:85; background:linear-gradient(135deg, var(--lav), var(--teal)); color:#0b0b0b; font-weight:900; padding:10px 14px; border-radius:12px; display:none}
+  .toast.show{display:inline-block}
+</style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="top-inner">
+      <div class="brand">
+        <div class="logo">GS</div>
+        <div>
+          <h1>Gentle Shepherd — Healing from Church Hurt</h1>
+          <div class="sub">Depths to Heights • A loving, pastoral companion for safety, truth, and wholeness</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="musicBtn" class="icon-btn" aria-pressed="false" title="Background music"><span id="musicIcon">▶︎</span> Music</button>
+        <button id="openInfo" class="icon-btn" title="Info">ℹ️</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="screen active" role="region" aria-label="Home">
+      <div class="panel">
+        <div class="pill">If you are in crisis, please contact your local helpline for immediate support.</div>
+        <div style="height:8px"></div>
+        <div class="grid-2" style="align-items:center">
+          <div>
+            <div class="caps">Pastoral Blessing for Today</div>
+            <h3 id="blessTitle"></h3>
+            <p id="blessText" class="muted"></p>
+            <div class="btn-row" style="margin-top:6px">
+              <button class="btn tiny" id="readBless">Read Aloud</button>
+              <button class="btn ghost tiny" data-nav="voice">Voice Settings</button>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Quick Progress</h3>
+            <div class="grid-2">
+              <div>
+                <div class="caps">Flags reviewed</div>
+                <div id="statFlags" style="font-weight:900; font-size:1.4rem">0%</div>
+              </div>
+              <div>
+                <div class="caps">Healing plans</div>
+                <div id="statPlans" style="font-weight:900; font-size:1.4rem">0</div>
+              </div>
+            </div>
+            <div class="progress" style="margin-top:6px"><div id="homeBar" class="bar" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards" style="margin-top:12px">
+        <div class="card">
+          <span class="tag">Journal</span>
+          <h2>Healing Plan & Safety</h2>
+          <p class="muted">Name what happened, assess impact, set boundaries, and choose gentle next steps. Save, export, or read aloud.</p>
+          <div class="btn-row"><button class="btn" data-nav="healing">Open</button></div>
+        </div>
+        <div class="card">
+          <span class="tag">Checklist</span>
+          <h2>Red / Green Flags</h2>
+          <p class="muted">Discern unhealthy dynamics and healthy church markers. Your toggles save automatically.</p>
+          <div class="btn-row"><button class="btn lav" data-nav="flags">Open</button></div>
+        </div>
+        <div class="card">
+          <span class="tag">Truth</span>
+          <h2>Lie → Truth (Scripture)</h2>
+          <p class="muted">Rewrite harmful messages with God’s word. Speak them over your heart with the voice you choose.</p>
+          <div class="btn-row"><button class="btn teal" data-nav="truth">Open</button></div>
+        </div>
+        <div class="card">
+          <span class="tag">Bible</span>
+          <h2>Teachings & Resources</h2>
+          <p class="muted">What God says about shepherds, authority, healing, and justice. Practical steps to find safety.</p>
+          <div class="btn-row"><button class="btn" data-nav="resources">Open</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HEALING PLAN -->
+    <section id="healing" class="screen" role="region" aria-label="Healing Plan">
+      <div class="pill">Healing Plan — with Safety & Boundaries</div>
+      <div style="height:10px"></div>
+
+      <div class="panel">
+        <div class="grid-2">
+          <div>
+            <label class="caps" for="hStory">1) What happened (brief)</label>
+            <textarea id="hStory" placeholder="Write a kind summary. You can add details later."></textarea>
+          </div>
+          <div>
+            <label class="caps">2) Impact (check any)</label>
+            <div class="grid-2">
+              <label><input type="checkbox" class="hImp" value="anxiety"> Anxiety</label>
+              <label><input type="checkbox" class="hImp" value="shame"> Shame</label>
+              <label><input type="checkbox" class="hImp" value="fear of church"> Fear of church</label>
+              <label><input type="checkbox" class="hImp" value="sleep issues"> Sleep issues</label>
+              <label><input type="checkbox" class="hImp" value="isolation"> Isolation</label>
+              <label><input type="checkbox" class="hImp" value="anger"> Anger</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <label class="caps" for="hBound">3) Safety & Boundaries</label>
+            <textarea id="hBound" placeholder="Examples: No private meetings; keep everything in writing; bring a trusted friend; change seats/section; pause serving until safe."></textarea>
+          </div>
+          <div>
+            <label class="caps" for="hSteps">4) Gentle Next Steps (small)</label>
+            <textarea id="hSteps" placeholder="Examples: Schedule with counselor; email elder board; find a support group; sabbath walk; read Psalm 23 aloud."></textarea>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <label class="caps" for="hPeople">5) Safe People (names)</label>
+            <textarea id="hPeople" placeholder="List two or three supportive people."></textarea>
+          </div>
+          <div>
+            <label class="caps" for="hPrayer">6) Prayer</label>
+            <textarea id="hPrayer" placeholder="Jesus, You are gentle and lowly. Heal my heart and lead me by still waters. Amen."></textarea>
+          </div>
+        </div>
+
+        <div class="btn-row" style="margin-top:6px">
+          <button class="btn" id="savePlan">Save Plan</button>
+          <button class="btn ghost" id="readPlan">Read Aloud</button>
+          <button class="btn ghost" id="clearPlan">Clear</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>My Healing Plans</h3>
+        <div class="btn-row">
+          <button class="btn tiny" id="exportPlans">Download .txt</button>
+          <button class="btn tiny" id="copyPlans">Copy</button>
+        </div>
+        <div id="planList" class="list"></div>
+      </div>
+
+      <div style="height:10px"></div>
+      <button class="btn ghost tiny" data-nav="home">← Back to Home</button>
+    </section>
+
+    <!-- FLAGS -->
+    <section id="flags" class="screen" role="region" aria-label="Flags">
+      <div class="pill">Red / Green Flags — Discernment Checklist</div>
+      <div style="height:10px"></div>
+
+      <div class="panel">
+        <div class="grid-2" style="align-items:center">
+          <div>
+            <div class="caps">Progress</div>
+            <div class="progress"><div id="flagBar" class="bar"></div></div>
+            <div class="meta" id="flagPct">0%</div>
+          </div>
+          <div class="btn-row" style="justify-content:flex-end">
+            <button class="btn tiny" id="resetFlags">Reset</button>
+            <button class="btn tiny" id="exportFlags">Download .txt</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Red Flags (harmful patterns)</h3>
+        <div id="redList" class="list"></div>
+      </div>
+      <div class="panel">
+        <h3>Green Flags (healthy patterns)</h3>
+        <div id="greenList" class="list"></div>
+      </div>
+
+      <div style="height:10px"></div>
+      <button class="btn ghost tiny" data-nav="home">← Back to Home</button>
+    </section>
+
+    <!-- TRUTH REPLACEMENTS -->
+    <section id="truth" class="screen" role="region" aria-label="Truth Replacements">
+      <div class="pill">Lie → Truth — Scripture Rewrites the Message</div>
+      <div style="height:10px"></div>
+
+      <div class="panel">
+        <div class="grid-2">
+          <div>
+            <label class="caps" for="tLie">Harmful message / lie</label>
+            <textarea id="tLie" placeholder="e.g., “If you question a leader, you’re rebellious.”"></textarea>
+          </div>
+          <div>
+            <label class="caps" for="tTruth">God’s truth (pick or write)</label>
+            <select id="truthPick"></select>
+            <textarea id="tTruth" placeholder="Write your truth here or select from the list above."></textarea>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top:6px">
+          <button class="btn" id="saveTruth">Save Replacement</button>
+          <button class="btn ghost" id="speakTruth">Read Aloud</button>
+          <button class="btn ghost" id="clearTruth">Clear</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>My Truth Replacements</h3>
+        <div class="btn-row">
+          <button class="btn tiny" id="exportTruths">Download .txt</button>
+          <button class="btn tiny" id="copyTruths">Copy</button>
+        </div>
+        <div id="truthList" class="list"></div>
+      </div>
+
+      <div style="height:10px"></div>
+      <button class="btn ghost tiny" data-nav="home">← Back to Home</button>
+    </section>
+
+    <!-- VOICE & AUDIO (settings) -->
+    <section id="voice" class="screen" role="region" aria-label="Voice Settings">
+      <div class="pill">Voice & Audio</div>
+      <div style="height:10px"></div>
+      <div class="panel">
+        <div class="grid-2">
+          <div>
+            <label class="caps" for="voiceSel">Voice</label>
+            <select id="voiceSel"></select>
+          </div>
+          <div>
+            <label class="caps" for="rate">Rate</label>
+            <input id="rate" type="range" min="0.7" max="1.4" step="0.05" value="0.95">
+          </div>
+        </div>
+        <div class="grid-2" style="align-items:end">
+          <div>
+            <label class="caps" for="pitch">Pitch</label>
+            <input id="pitch" type="range" min="0.7" max="1.4" step="0.05" value="1.0">
+          </div>
+          <div class="btn-row" style="justify-content:flex-end">
+            <button class="btn tiny" id="previewVoice">Preview</button>
+            <button class="btn ghost tiny" id="saveVoice">Save</button>
+          </div>
+        </div>
+        <div class="meta">Multiple choices guaranteed: device voices + style presets.</div>
+      </div>
+      <div style="height:10px"></div>
+      <button class="btn ghost tiny" data-nav="home">← Back to Home</button>
+    </section>
+
+    <!-- RESOURCES / TEACHING -->
+    <section id="resources" class="screen" role="region" aria-label="Resources">
+      <div class="pill">Teachings & Resources — Scripture, Safety, and Hope</div>
+      <div style="height:10px"></div>
+
+      <div class="panel">
+        <details open class="item">
+          <summary><strong>Ezekiel 34 — God against abusive shepherds</strong></summary>
+          <p>God rebukes shepherds who use the flock instead of serving it and promises, “I myself will shepherd My sheep.” The Lord defends the harmed and removes predatory leaders.</p>
+          <ul>
+            <li><em>Encouragement:</em> Your Good Shepherd sees and will act.</li>
+          </ul>
+        </details>
+        <details class="item">
+          <summary><strong>1 Peter 5:2–3 — Gentle leadership</strong></summary>
+          <p>Leaders are to shepherd willingly, not domineering, being examples to the flock. Coercion and control oppose Christ.</p>
+        </details>
+        <details class="item">
+          <summary><strong>Matthew 20:25–28 — Not like the Gentiles</strong></summary>
+          <p>Jesus flips power: leaders serve. Greatness is measured by humility, not platform.</p>
+        </details>
+        <details class="item">
+          <summary><strong>Luke 4:18 — He binds up the brokenhearted</strong></summary>
+          <p>Jesus’ mission includes healing the bruised, freeing the oppressed, and proclaiming good news to the poor. Church wounds do not disqualify you from His care.</p>
+        </details>
+        <details class="item">
+          <summary><strong>Matthew 7:15–20 — Fruit test</strong></summary>
+          <p>False prophets can look right but harm people. Examine consistent fruit: humility, integrity, repentance, love (Gal 5:22–23).</p>
+        </details>
+        <details class="item">
+          <summary><strong>3 John 9–12 — Diotrephes and hospitality</strong></summary>
+          <p>Diotrephes loves to be first, rejects correction, and bullies. God commends those who welcome, serve, and walk in truth.</p>
+        </details>
+
+        <div class="item">
+          <strong>Practical Safety Steps</strong>
+          <ul class="muted">
+            <li>Keep records: save messages, dates, and witnesses.</li>
+            <li>Set boundaries: no private meetings; bring a support person; insist on written communication.</li>
+            <li>Seek outside counsel: wise pastors, trauma-informed counselors.</li>
+            <li>If a crime may have occurred, contact local authorities.</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <strong>Finding a Healthy Church</strong>
+          <ul class="muted">
+            <li>Plural leadership with accountability; financial transparency.</li>
+            <li>Teachable leaders who repent and welcome questions.</li>
+            <li>Member care > platform growth; patient discipleship; shared power.</li>
+            <li>Clear, practiced safeguarding policies.</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <strong>Links & Support</strong>
+          <div class="btn-row">
+            <button class="btn tiny" onclick="window.open('https://depthstoheights.org','_blank')">Depths to Heights</button>
+            <button class="btn tiny" onclick="window.open('mailto:depthstoheights@gmail.com','_blank')">Email</button>
+            <button class="btn tiny" onclick="window.open('https://www.paypal.com/donate/?hosted_button_id=8GRE7B8C3TP2U','_blank')">Donate via PayPal</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:10px"></div>
+      <button class="btn ghost tiny" data-nav="home">← Back to Home</button>
+    </section>
+
+    <!-- CRISIS -->
+    <section id="crisis" class="screen" role="region" aria-label="Crisis">
+      <div class="pill">Crisis Support</div>
+      <div style="height:10px"></div>
+      <div class="panel">
+        <h3>If you are in crisis</h3>
+        <p>“If you are in crisis, please contact your local helpline for immediate support.” You are not alone—reach out to a trusted person and your local services now.</p>
+      </div>
+      <div class="panel">
+        <h3>My Crisis Contacts</h3>
+        <div class="grid-2">
+          <div>
+            <label class="caps" for="cName">Name</label>
+            <input id="cName" placeholder="Trusted friend / counselor / elder">
+          </div>
+          <div>
+            <label class="caps" for="cPhone">Phone</label>
+            <input id="cPhone" placeholder="+358… or local number">
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top:6px">
+          <button class="btn tiny" id="addContact">Add Contact</button>
+          <button class="btn ghost tiny" id="exportContacts">Download .txt</button>
+        </div>
+        <div id="contactList" class="list"></div>
+      </div>
+      <div class="panel">
+        <h3>Grounding & Care</h3>
+        <ul class="muted">
+          <li>Place a hand on your chest. Breathe slowly: in 4 • hold 2 • out 6 (repeat 5 times).</li>
+          <li>Psalm 23 aloud: “The Lord is my Shepherd… He restores my soul.”</li>
+          <li>Text one safe person: “Can you check in with me today?”</li>
+        </ul>
+      </div>
+      <div style="height:10px"></div>
+      <button class="btn ghost tiny" data-nav="home">← Back to Home</button>
+    </section>
+  </main>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav" aria-label="Primary">
+    <div class="nav-inner">
+      <button class="nav-btn active" data-nav="home"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-btn" data-nav="crisis"><span class="nav-icon">🆘</span>Crisis</button>
+      <button class="nav-btn" data-nav="resources"><span class="nav-icon">📚</span>Resources</button>
+      <button class="nav-btn" id="infoBtn"><span class="nav-icon">ℹ️</span>Info</button>
+      <button class="nav-btn" id="aboutBtn"><span class="nav-icon">❤️</span>About</button>
+    </div>
+  </nav>
+
+  <!-- INFO MODAL -->
+  <div id="infoModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+    <div class="sheet">
+      <div class="close"><button class="btn tiny" id="infoClose">Close</button></div>
+      <h3 id="infoTitle">Info — What this app does</h3>
+      <p><strong>Gentle Shepherd</strong> is a loving, pastoral tool for those harmed by church dynamics or spiritual abuse. It helps you build a healing plan, discern red/green flags, replace lies with Scripture’s truth, and learn what God says about shepherds and safety.</p>
+      <h3>How to use</h3>
+      <ol>
+        <li>Open <em>Healing Plan</em>, write a kind summary, set <em>boundaries</em>, and choose one gentle step.</li>
+        <li>Review <em>Red/Green Flags</em>. Notice patterns—your discernment is valuable.</li>
+        <li>Use <em>Lie → Truth</em> to rewrite harmful messages with God’s word. Read them aloud with the <em>Voice</em> you choose.</li>
+        <li>Explore <em>Resources</em> for Scripture and safety practices.</li>
+      </ol>
+      <h3>Install on your phone</h3>
+      <ul>
+        <li><strong>iPhone (Safari):</strong> Share → <em>Add to Home Screen</em></li>
+        <li><strong>Android (Chrome):</strong> Menu ⋮ → <em>Add to Home Screen</em></li>
+      </ul>
+      <div class="btn-row">
+        <button class="btn tiny" onclick="window.open('https://depthstoheights.org','_blank')">Website</button>
+        <button class="btn tiny" onclick="window.open('mailto:depthstoheights@gmail.com','_blank')">Email</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT MODAL -->
+  <div id="aboutModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <div class="sheet">
+      <div class="close"><button class="btn tiny" id="aboutClose">Close</button></div>
+      <h3 id="aboutTitle">About • Depths to Heights</h3>
+      <p><strong>Made by Justin</strong> • Depths to Heights</p>
+      <p><a href="https://depthstoheights.org" target="_blank" rel="noopener">depthstoheights.org</a> • <a href="mailto:depthstoheights@gmail.com" target="_blank" rel="noopener">depthstoheights@gmail.com</a></p>
+      <p><strong>Mission:</strong> From the deepest places to the highest praise—serving with a gentle, grace-filled pastor’s heart.</p>
+      <div class="btn-row">
+        <button class="btn tiny" onclick="window.open('https://www.paypal.com/donate/?hosted_button_id=8GRE7B8C3TP2U','_blank')">Donate via PayPal</button>
+      </div>
+      <div style="height:6px"></div>
+      <div class="panel">
+        <h3>Privacy & Data</h3>
+        <p class="muted">Your notes and settings are stored only on this device (LocalStorage). No accounts or servers.</p>
+        <div class="btn-row">
+          <button class="btn tiny" id="exportAll">Export All Data</button>
+          <button class="btn rose tiny" id="resetAll">Reset App (local)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =========================================================
+   COMPANY INFO / CONSTANTS
+   ========================================================= */
+const COMPANY = {
+  name: "Depths to Heights",
+  email: "depthstoheights@gmail.com",
+  site: "https://depthstoheights.org",
+  donate: "https://www.paypal.com/donate/?hosted_button_id=8GRE7B8C3TP2U"
+};
+
+/* =========================================================
+   DATA
+   ========================================================= */
+const BLESSINGS = [
+  {title:"The Shepherd Sees You", text:"Beloved, the Lord sees every bruise and every brave boundary. He gathers you like a lamb and keeps you close to His heart (Isaiah 40:11)."},
+  {title:"Gentle and Lowly", text:"Jesus is gentle and humble in heart. He will not break a bruised reed. Rest in His kindness today (Matthew 11:28–29; 12:20)."},
+  {title:"Truth Stronger Than Lies", text:"God’s truth outlives every manipulative word. His voice frees, not frightens. Where the Spirit is, there is freedom (2 Corinthians 3:17)."},
+  {title:"The Lord Restores Souls", text:"He makes you lie down in green pastures and restores your soul. You are not a problem to fix—you are a person to cherish (Psalm 23:1–3)."}
+];
+
+const RED_FLAGS = [
+  "Leader cannot be questioned; dissent is labeled rebellion.",
+  "Isolation from friends/family; loyalty to leader above all.",
+  "Public shaming, name-calling, or threats from the pulpit.",
+  "Demand for secrecy; 'Don’t talk about this.'",
+  "No financial or moral accountability; decisions hidden.",
+  "Favoritism for donors or inner circle; others sidelined.",
+  "Spiritualizing control: 'God told me… so obey.'",
+  "Retaliation when concerns are raised; smear or exile.",
+  "High-pressure giving or serving; worth equals output.",
+  "Policies exist on paper but not in practice."
+];
+
+const GREEN_FLAGS = [
+  "Plural, accountable leadership; transparency with budgets.",
+  "Leaders welcome questions; repent when wrong.",
+  "Safeguarding policies practiced and reviewed.",
+  "Service shared; gifts nurtured; no celebrity platform.",
+  "People cared for more than programs; pace allows rest.",
+  "Corrections done privately, gently, and with witnesses.",
+  "Clear pathways to report concerns without retaliation.",
+  "Scripture applied with humility and context.",
+  "Diverse voices and healthy conflict resolution.",
+  "Prayerful dependence on Jesus; fruit of the Spirit."
+];
+
+const TRUTHS = [
+  {ref:"Matthew 11:28–29", truth:"Jesus is gentle and lowly; His yoke is easy and His burden is light."},
+  {ref:"1 Peter 5:2–3", truth:"True shepherds do not domineer; they serve as examples to the flock."},
+  {ref:"Luke 4:18", truth:"Christ heals the brokenhearted and sets the oppressed free."},
+  {ref:"Ezekiel 34:10–16", truth:"God Himself defends His sheep and rescues them from abusive shepherds."},
+  {ref:"2 Corinthians 3:17", truth:"Where the Spirit of the Lord is, there is freedom—not fear."},
+  {ref:"Matthew 20:26–28", truth:"Greatness is serving, not controlling."},
+  {ref:"1 John 4:18", truth:"Perfect love drives out fear; fear is not God’s tool for growth."},
+  {ref:"Psalm 23", truth:"The Lord is your Shepherd; He restores your soul and leads you to peace."},
+  {ref:"1 Thessalonians 5:21–22", truth:"Test everything; hold fast to what is good; reject every kind of evil."},
+  {ref:"Galatians 5:22–23", truth:"The Spirit’s fruit looks like love, joy, peace, patience, kindness…"}
+];
+
+/* =========================================================
+   STATE & STORAGE
+   ========================================================= */
+const KEY="dth_church_hurt_app";
+const state = {
+  view:"home",
+  musicOn:false,
+  voice:{ id:null, type:null, name:null, rate:0.95, pitch:1.0 },
+  plans:[],          // {id, ts, story, impacts[], boundaries, steps, people, prayer}
+  flags:{ red:{}, green:{} }, // index:boolean
+  truths:[],         // {id, ts, lie, truth, ref}
+  contacts:[]        // {id, name, phone}
+};
+function load(){ try{ Object.assign(state, JSON.parse(localStorage.getItem(KEY)||"{}")); }catch(e){} }
+function save(){ localStorage.setItem(KEY, JSON.stringify(state)); }
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 1800); }
+
+/* =========================================================
+   NAVIGATION & MODALS
+   ========================================================= */
+const SCREENS={home, healing, flags, truth, resources, crisis, voice};
+function show(view){
+  state.view=view; save();
+  Object.values(SCREENS).forEach(s=>s.classList.remove('active'));
+  SCREENS[view].classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.nav===view));
+  if(view==="home") renderHome();
+  if(view==="healing") renderPlans();
+  if(view==="flags") { renderFlags(); }
+  if(view==="truth") { renderTruths(); populateTruthPick(); }
+  if(view==="crisis") renderContacts();
+  if(view==="voice") populateVoices();
+}
+document.addEventListener('click', (e)=>{ const nav=e.target.closest('[data-nav]'); if(nav) show(nav.dataset.nav); });
+document.getElementById('infoBtn').addEventListener('click', ()=>document.getElementById('infoModal').classList.add('show'));
+document.getElementById('aboutBtn').addEventListener('click', ()=>document.getElementById('aboutModal').classList.add('show'));
+document.getElementById('openInfo').addEventListener('click', ()=>document.getElementById('infoModal').classList.add('show'));
+document.getElementById('infoClose').addEventListener('click', ()=>document.getElementById('infoModal').classList.remove('show'));
+document.getElementById('aboutClose').addEventListener('click', ()=>document.getElementById('aboutModal').classList.remove('show'));
+
+/* =========================================================
+   BACKGROUND MUSIC — gentle harp + ocean hush
+   ========================================================= */
+let ac=null, master=null, delay=null, seqTimer=null, ocean=null;
+const HARP=[261.63, 311.13, 392.00, 466.16, 523.25]; // Cm-ish arpeggio
+function startMusic(){
+  if(!ac){ ac=new (window.AudioContext||window.webkitAudioContext)(); }
+  master=ac.createGain(); master.gain.value=0.05; master.connect(ac.destination);
+
+  // Ocean hush (filtered noise)
+  const buf=ac.createBuffer(1, ac.sampleRate*2, ac.sampleRate);
+  const data=buf.getChannelData(0); for(let i=0;i<data.length;i++){ data[i]=(Math.random()*2-1)*0.05; }
+  ocean=ac.createBufferSource(); ocean.buffer=buf; ocean.loop=true;
+  const lp=ac.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=800;
+  const og=ac.createGain(); og.gain.value=0.02;
+  ocean.connect(lp).connect(og).connect(master); ocean.start();
+
+  // Delay for shimmer
+  delay=ac.createDelay(1.2); delay.delayTime.value=0.32;
+  const fb=ac.createGain(); fb.gain.value=0.28; delay.connect(fb).connect(delay);
+  delay.connect(master);
+
+  // Harp arpeggio
+  let step=0;
+  seqTimer=setInterval(()=>{
+    const base=HARP[step%HARP.length];
+    pluck(base, .8); pluck(base*1.5, .5); if(Math.random()<0.5) pluck(base*2, .3);
+    step++;
+  }, 1800);
+
+  state.musicOn=true; save();
+  document.getElementById('musicBtn').setAttribute('aria-pressed','true');
+  document.getElementById('musicIcon').textContent='⏸';
+  toast('Music on');
+}
+function pluck(freq, vol){
+  const o=ac.createOscillator(); o.type='sine'; o.frequency.value=freq;
+  const g=ac.createGain(); g.gain.setValueAtTime(0, ac.currentTime);
+  g.gain.linearRampToValueAtTime(0.6*vol, ac.currentTime+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0008, ac.currentTime+2.0);
+  const bp=ac.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=freq*2.2; bp.Q.value=8;
+  o.connect(bp).connect(g).connect(delay);
+  o.start(); o.stop(ac.currentTime+2.2);
+}
+function stopMusic(){
+  try{ clearInterval(seqTimer); }catch(e){}
+  seqTimer=null; try{ocean&&ocean.stop();}catch(e){}
+  if(master) master.disconnect(); if(ac){ ac.close(); ac=null; }
+  state.musicOn=false; save();
+  document.getElementById('musicBtn').setAttribute('aria-pressed','false');
+  document.getElementById('musicIcon').textContent='▶︎';
+  toast('Music off');
+}
+document.getElementById('musicBtn').addEventListener('click', ()=>{ state.musicOn ? stopMusic() : startMusic(); });
+
+/* =========================================================
+   GUARANTEED MULTI-CHOICE VOICE PICKER
+   ========================================================= */
+const voiceSel = document.getElementById('voiceSel');
+const rateEl   = document.getElementById('rate');
+const pitchEl  = document.getElementById('pitch');
+const VOICE_STYLES = [
+  { id:'style:Calm',   label:'Style — Calm (soft, slow)',        rate:0.90, pitch:1.00 },
+  { id:'style:Warm',   label:'Style — Warm (gentle, higher)',    rate:0.98, pitch:1.10 },
+  { id:'style:Deep',   label:'Style — Deep (lower pitch)',       rate:0.95, pitch:0.85 },
+  { id:'style:Bright', label:'Style — Bright (faster, higher)',  rate:1.10, pitch:1.20 }
+];
+function populateVoices(){
+  const vs = ('speechSynthesis' in window) ? speechSynthesis.getVoices() : [];
+  voiceSel.innerHTML='';
+  const opts = vs.map(v => ({ type:'device', id:'voice:'+v.name, name:v.name, label:`Device — ${v.name}${v.lang ? ` (${v.lang})` : ''}` }));
+  if(opts.length < 2){ VOICE_STYLES.forEach(s=>opts.push({ type:'style', ...s })); }
+  opts.forEach(o=>{ const opt=document.createElement('option'); opt.value=o.id; opt.textContent=o.label; voiceSel.appendChild(opt); });
+  const saved = state.voice?.id || (state.voice?.name ? ('voice:'+state.voice.name) : '');
+  if([...voiceSel.options].some(o=>o.value===saved)) voiceSel.value=saved;
+  rateEl.value  = state.voice?.rate || 0.95;
+  pitchEl.value = state.voice?.pitch || 1.0;
+}
+if('speechSynthesis' in window){ speechSynthesis.onvoiceschanged = populateVoices; }
+document.getElementById('previewVoice').addEventListener('click', ()=> speak("This is your selected voice. Jesus is gentle and lowly; He will not break a bruised reed."));
+document.getElementById('saveVoice').addEventListener('click', ()=>{
+  const sel = getSelectedVoice(); state.voice = sel; save(); toast('Voice saved');
+});
+function getSelectedVoice(){
+  const val=voiceSel.value||'';
+  if(val.startsWith('voice:')){
+    return { id:val, type:'device', name:val.slice(6), rate:parseFloat(rateEl.value||0.95), pitch:parseFloat(pitchEl.value||1.0) };
+  }
+  const style = VOICE_STYLES.find(s=>s.id===val) || VOICE_STYLES[0];
+  return { id:style.id, type:'style', name:null, rate:style.rate, pitch:style.pitch };
+}
+function speak(text){
+  if(!('speechSynthesis' in window)) { toast('Device voice not available'); return; }
+  const sel=getSelectedVoice();
+  const u=new SpeechSynthesisUtterance(text);
+  const vs=speechSynthesis.getVoices();
+  const base=(sel.type==='device') ? vs.find(x=>x.name===sel.name) : (vs.find(x=>x.lang&&x.lang.toLowerCase().startsWith('en'))||vs[0]);
+  if(base) u.voice=base;
+  u.rate=sel.rate; u.pitch=sel.pitch;
+  try{ speechSynthesis.cancel(); }catch(e){}
+  speechSynthesis.speak(u);
+}
+
+/* =========================================================
+   HOME — blessing + quick stats
+   ========================================================= */
+function renderHome(){
+  const i = (new Date().getDate()+new Date().getMonth()) % BLESSINGS.length;
+  const b=BLESSINGS[i];
+  document.getElementById('blessTitle').textContent=b.title;
+  document.getElementById('blessText').textContent=b.text;
+  document.getElementById('readBless').onclick=()=>speak(`${b.title}. ${b.text}`);
+
+  // Stats
+  const total=RED_FLAGS.length + GREEN_FLAGS.length;
+  const toggled = Object.keys(state.flags.red).length + Object.keys(state.flags.green).length;
+  const pct = Math.round((toggled/total)*100);
+  document.getElementById('statFlags').textContent=pct+'%';
+  document.getElementById('homeBar').style.width=pct+'%';
+  document.getElementById('statPlans').textContent=state.plans.length;
+}
+
+/* =========================================================
+   HEALING PLAN — save/list/export
+   ========================================================= */
+const planList=document.getElementById('planList');
+document.getElementById('savePlan').addEventListener('click', ()=>{
+  const story=document.getElementById('hStory').value.trim();
+  const impacts=[...document.querySelectorAll('.hImp:checked')].map(x=>x.value);
+  const boundaries=document.getElementById('hBound').value.trim();
+  const steps=document.getElementById('hSteps').value.trim();
+  const people=document.getElementById('hPeople').value.trim();
+  const prayer=document.getElementById('hPrayer').value.trim();
+  if(!(story || impacts.length || boundaries || steps || people || prayer)){ toast('Write at least one line'); return; }
+  state.plans.push({id:Date.now(), ts:Date.now(), story, impacts, boundaries, steps, people, prayer}); save();
+  ['hStory','hBound','hSteps','hPeople','hPrayer'].forEach(id=>document.getElementById(id).value=''); document.querySelectorAll('.hImp:checked').forEach(x=>x.checked=false);
+  renderPlans(); toast('Plan saved');
+});
+document.getElementById('readPlan').addEventListener('click', ()=>{
+  const lines = [
+    'Story: ' + (document.getElementById('hStory').value||''),
+    'Impacts: ' + [...document.querySelectorAll('.hImp:checked')].map(x=>x.value).join(', '),
+    'Boundaries: ' + (document.getElementById('hBound').value||''),
+    'Steps: ' + (document.getElementById('hSteps').value||''),
+    'People: ' + (document.getElementById('hPeople').value||''),
+    'Prayer: ' + (document.getElementById('hPrayer').value||'')
+  ].join('. ');
+  if(lines.replace(/[.\s]/g,'').length<3){ toast('Write something first'); return; }
+  speak(lines);
+});
+document.getElementById('clearPlan').addEventListener('click', ()=>{
+  ['hStory','hBound','hSteps','hPeople','hPrayer'].forEach(id=>document.getElementById(id).value=''); document.querySelectorAll('.hImp:checked').forEach(x=>x.checked=false);
+});
+function renderPlans(){
+  planList.innerHTML='';
+  if(state.plans.length===0){ const d=document.createElement('div'); d.className='muted'; d.textContent='No plans yet.'; planList.appendChild(d); return; }
+  [...state.plans].sort((a,b)=>b.ts-a.ts).forEach(p=>{
+    const div=document.createElement('div'); div.className='item';
+    div.innerHTML=`
+      <div class="meta">${new Date(p.ts).toLocaleString()}</div>
+      ${p.story?`<div><strong>Story:</strong> ${escapeHtml(p.story)}</div>`:''}
+      ${(p.impacts&&p.impacts.length)?`<div><strong>Impacts:</strong> ${p.impacts.map(escapeHtml).join(', ')}</div>`:''}
+      ${p.boundaries?`<div><strong>Boundaries:</strong> ${escapeHtml(p.boundaries)}</div>`:''}
+      ${p.steps?`<div><strong>Steps:</strong> ${escapeHtml(p.steps)}</div>`:''}
+      ${p.people?`<div><strong>People:</strong> ${escapeHtml(p.people)}</div>`:''}
+      ${p.prayer?`<div><strong>Prayer:</strong> ${escapeHtml(p.prayer)}</div>`:''}
+      <div class="btn-row">
+        <button class="btn tiny" data-read="${p.id}">Read</button>
+        <button class="btn ghost tiny" data-del="${p.id}">Delete</button>
+      </div>`;
+    planList.appendChild(div);
+  });
+}
+planList.addEventListener('click',(e)=>{
+  const del=e.target.getAttribute('data-del');
+  const read=e.target.getAttribute('data-read');
+  if(del){
+    const idx=state.plans.findIndex(x=>x.id===Number(del));
+    if(idx>-1){
+      const removed=state.plans.splice(idx,1)[0]; save(); renderPlans();
+      const t=document.getElementById('toast'); t.innerHTML='Deleted. <button class="btn tiny" id="undoPlan">Undo</button>'; t.classList.add('show');
+      const undo=()=>{ state.plans.push(removed); save(); renderPlans(); t.classList.remove('show'); toast('Restored'); };
+      document.addEventListener('click', function handler(ev){ if(ev.target && ev.target.id==='undoPlan'){ undo(); document.removeEventListener('click', handler); }}, {once:true});
+      setTimeout(()=>t.classList.remove('show'),4000);
+    }
+  }
+  if(read){
+    const p=state.plans.find(x=>x.id===Number(read)); if(!p) return;
+    const text=`Story: ${p.story||''}. Impacts: ${(p.impacts||[]).join(', ')}. Boundaries: ${p.boundaries||''}. Steps: ${p.steps||''}. People: ${p.people||''}. Prayer: ${p.prayer||''}.`;
+    speak(text);
+  }
+});
+document.getElementById('exportPlans').addEventListener('click', ()=>{
+  const lines=[...state.plans].sort((a,b)=>a.ts-b.ts).map(p=>`Date: ${new Date(p.ts).toLocaleString()}\nStory: ${p.story}\nImpacts: ${(p.impacts||[]).join(', ')}\nBoundaries: ${p.boundaries}\nSteps: ${p.steps}\nPeople: ${p.people}\nPrayer: ${p.prayer}\n---`).join('\n');
+  downloadTxt('gentle-shepherd-plans.txt', lines); toast('Downloaded');
+});
+document.getElementById('copyPlans').addEventListener('click', async ()=>{
+  const lines=[...state.plans].sort((a,b)=>a.ts-b.ts).map(p=>`${new Date(p.ts).toLocaleString()} | ${p.story} | ${p.boundaries} | ${p.steps}`).join('\n');
+  try{ await navigator.clipboard.writeText(lines); toast('Copied'); }catch(_){ toast('Copy not available'); }
+});
+
+/* =========================================================
+   FLAGS — toggle, progress, export
+   ========================================================= */
+const redList=document.getElementById('redList');
+const greenList=document.getElementById('greenList');
+function renderFlags(){
+  redList.innerHTML=''; greenList.innerHTML='';
+  RED_FLAGS.forEach((txt,i)=>{
+    const div=document.createElement('div'); div.className='item';
+    const checked = !!state.flags.red[i];
+    div.innerHTML=`<label style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" ${checked?'checked':''} data-red="${i}"><span>${escapeHtml(txt)}</span></label>`;
+    redList.appendChild(div);
+  });
+  GREEN_FLAGS.forEach((txt,i)=>{
+    const div=document.createElement('div'); div.className='item';
+    const checked = !!state.flags.green[i];
+    div.innerHTML=`<label style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" ${checked?'checked':''} data-green="${i}"><span>${escapeHtml(txt)}</span></label>`;
+    greenList.appendChild(div);
+  });
+  updateFlagProgress();
+}
+function updateFlagProgress(){
+  const total=RED_FLAGS.length + GREEN_FLAGS.length;
+  const toggled = Object.keys(state.flags.red).length + Object.keys(state.flags.green).length;
+  const pct=Math.round((toggled/total)*100);
+  document.getElementById('flagPct').textContent=pct+'%';
+  document.getElementById('flagBar').style.width=pct+'%';
+  document.getElementById('statFlags') && (document.getElementById('statFlags').textContent=pct+'%');
+  document.getElementById('homeBar') && (document.getElementById('homeBar').style.width=pct+'%');
+}
+redList.addEventListener('change', (e)=>{
+  const i=e.target.getAttribute('data-red'); if(i==null) return;
+  if(e.target.checked) state.flags.red[i]=true; else delete state.flags.red[i];
+  save(); updateFlagProgress();
+});
+greenList.addEventListener('change', (e)=>{
+  const i=e.target.getAttribute('data-green'); if(i==null) return;
+  if(e.target.checked) state.flags.green[i]=true; else delete state.flags.green[i];
+  save(); updateFlagProgress();
+});
+document.getElementById('resetFlags').addEventListener('click', ()=>{
+  state.flags={red:{}, green:{}}; save(); renderFlags(); toast('Checklist reset');
+});
+document.getElementById('exportFlags').addEventListener('click', ()=>{
+  const lines = [
+    '--- Red Flags (checked) ---',
+    Object.keys(state.flags.red).map(i=>`• ${RED_FLAGS[i]}`).join('\n'),
+    '',
+    '--- Green Flags (checked) ---',
+    Object.keys(state.flags.green).map(i=>`• ${GREEN_FLAGS[i]}`).join('\n')
+  ].join('\n');
+  downloadTxt('gentle-shepherd-flags.txt', lines); toast('Downloaded');
+});
+
+/* =========================================================
+   TRUTH REPLACEMENTS
+   ========================================================= */
+const truthList=document.getElementById('truthList');
+const truthPick=document.getElementById('truthPick');
+function populateTruthPick(){
+  truthPick.innerHTML='<option value="">(Select a Scripture truth)</option>';
+  TRUTHS.forEach((t,idx)=>{ const o=document.createElement('option'); o.value=idx; o.textContent=`${t.truth} — ${t.ref}`; truthPick.appendChild(o); });
+}
+truthPick.addEventListener('change', ()=>{
+  const v=truthPick.value; if(v==='') return;
+  const t=TRUTHS[Number(v)]; document.getElementById('tTruth').value = `${t.truth} — ${t.ref}`;
+});
+document.getElementById('saveTruth').addEventListener('click', ()=>{
+  const lie=document.getElementById('tLie').value.trim();
+  const truth=document.getElementById('tTruth').value.trim();
+  let ref='';
+  const pick=truthPick.value;
+  if(pick!==''){ ref=TRUTHS[Number(pick)].ref; }
+  if(!(lie || truth)){ toast('Write something first'); return; }
+  state.truths.push({id:Date.now(), ts:Date.now(), lie, truth, ref}); save(); renderTruths();
+  document.getElementById('tLie').value=''; document.getElementById('tTruth').value=''; truthPick.value='';
+  toast('Saved ✓');
+});
+document.getElementById('speakTruth').addEventListener('click', ()=>{
+  const text = `Harmful message: ${(document.getElementById('tLie').value||'')}. God’s truth: ${(document.getElementById('tTruth').value||'')}.`;
+  if(text.replace(/[.\s]/g,'').length<6){ toast('Write a lie and truth first'); return; }
+  speak(text);
+});
+document.getElementById('clearTruth').addEventListener('click', ()=>{
+  document.getElementById('tLie').value=''; document.getElementById('tTruth').value=''; truthPick.value='';
+});
+function renderTruths(){
+  truthList.innerHTML='';
+  if(state.truths.length===0){ const d=document.createElement('div'); d.className='muted'; d.textContent='No truth replacements yet.'; truthList.appendChild(d); return; }
+  [...state.truths].sort((a,b)=>b.ts-a.ts).forEach(t=>{
+    const div=document.createElement('div'); div.className='item';
+    div.innerHTML=`
+      <div class="meta">${new Date(t.ts).toLocaleString()}</div>
+      ${t.lie?`<div><strong>Lie:</strong> ${escapeHtml(t.lie)}</div>`:''}
+      ${t.truth?`<div><strong>Truth:</strong> ${escapeHtml(t.truth)} ${t.ref?`<span class="meta">— ${escapeHtml(t.ref)}</span>`:''}</div>`:''}
+      <div class="btn-row">
+        <button class="btn tiny" data-read="${t.id}">Read</button>
+        <button class="btn ghost tiny" data-copy="${t.id}">Copy</button>
+        <button class="btn ghost tiny" data-del="${t.id}">Delete</button>
+      </div>`;
+    truthList.appendChild(div);
+  });
+}
+truthList.addEventListener('click', async (e)=>{
+  const read=e.target.getAttribute('data-read');
+  const del=e.target.getAttribute('data-del');
+  const copy=e.target.getAttribute('data-copy');
+  if(read){
+    const t=state.truths.find(x=>x.id===Number(read)); if(!t) return;
+    speak(`Harmful message: ${t.lie||''}. God’s truth: ${t.truth||''}.`);
+  }
+  if(copy){
+    const t=state.truths.find(x=>x.id===Number(copy));
+    const text = `Lie: ${t?.lie||''}\nTruth: ${t?.truth||''}${t?.ref?` — ${t.ref}`:''}`;
+    try{ await navigator.clipboard.writeText(text); toast('Copied'); }catch(_){ toast('Copy not available'); }
+  }
+  if(del){
+    const idx=state.truths.findIndex(x=>x.id===Number(del));
+    if(idx>-1){
+      const removed=state.truths.splice(idx,1)[0]; save(); renderTruths();
+      const t=document.getElementById('toast'); t.innerHTML='Deleted. <button class="btn tiny" id="undoTruth">Undo</button>'; t.classList.add('show');
+      const undo=()=>{ state.truths.push(removed); save(); renderTruths(); t.classList.remove('show'); toast('Restored'); };
+      document.addEventListener('click', function handler(ev){ if(ev.target && ev.target.id==='undoTruth'){ undo(); document.removeEventListener('click', handler); }}, {once:true});
+      setTimeout(()=>t.classList.remove('show'),4000);
+    }
+  }
+});
+document.getElementById('exportTruths').addEventListener('click', ()=>{
+  const lines = [...state.truths].sort((a,b)=>a.ts-b.ts).map(t=>`Date: ${new Date(t.ts).toLocaleString()}\nLie: ${t.lie}\nTruth: ${t.truth}${t.ref?` — ${t.ref}`:''}\n---`).join('\n');
+  downloadTxt('gentle-shepherd-truths.txt', lines); toast('Downloaded');
+});
+document.getElementById('copyTruths').addEventListener('click', async ()=>{
+  const lines = [...state.truths].sort((a,b)=>a.ts-b.ts).map(t=>`${new Date(t.ts).toLocaleString()} | ${t.lie} -> ${t.truth}`).join('\n');
+  try{ await navigator.clipboard.writeText(lines); toast('Copied'); }catch(_){ toast('Copy not available'); }
+});
+
+/* =========================================================
+   CRISIS CONTACTS
+   ========================================================= */
+const contactList=document.getElementById('contactList');
+document.getElementById('addContact').addEventListener('click', ()=>{
+  const name=document.getElementById('cName').value.trim();
+  const phone=document.getElementById('cPhone').value.trim();
+  if(!(name||phone)){ toast('Add a name or phone'); return; }
+  state.contacts.push({id:Date.now(), name, phone}); save();
+  document.getElementById('cName').value=''; document.getElementById('cPhone').value='';
+  renderContacts(); toast('Contact saved');
+});
+function renderContacts(){
+  contactList.innerHTML='';
+  if(state.contacts.length===0){ const d=document.createElement('div'); d.className='muted'; d.textContent='No contacts yet.'; contactList.appendChild(d); return; }
+  [...state.contacts].sort((a,b)=>a.name.localeCompare(b.name)).forEach(c=>{
+    const div=document.createElement('div'); div.className='item';
+    div.innerHTML=`
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+        <div><strong>${escapeHtml(c.name||'(no name)')}</strong> <span class="meta">${escapeHtml(c.phone||'')}</span></div>
+        <div class="btn-row">
+          ${c.phone?`<a class="btn tiny" href="tel:${encodeURIComponent(c.phone)}">Call</a>`:''}
+          <button class="btn ghost tiny" data-del="${c.id}">Delete</button>
+        </div>
+      </div>`;
+    contactList.appendChild(div);
+  });
+}
+contactList.addEventListener('click',(e)=>{
+  const del=e.target.getAttribute('data-del'); if(!del) return;
+  const idx=state.contacts.findIndex(x=>x.id===Number(del));
+  if(idx>-1){
+    const removed=state.contacts.splice(idx,1)[0]; save(); renderContacts();
+    const t=document.getElementById('toast'); t.innerHTML='Deleted. <button class="btn tiny" id="undoContact">Undo</button>'; t.classList.add('show');
+    const undo=()=>{ state.contacts.push(removed); save(); renderContacts(); t.classList.remove('show'); toast('Restored'); };
+    document.addEventListener('click', function handler(ev){ if(ev.target && ev.target.id==='undoContact'){ undo(); document.removeEventListener('click', handler); }}, {once:true});
+    setTimeout(()=>t.classList.remove('show'),4000);
+  }
+});
+document.getElementById('exportContacts').addEventListener('click', ()=>{
+  const lines=[...state.contacts].map(c=>`${c.name} — ${c.phone||''}`).join('\n');
+  downloadTxt('gentle-shepherd-contacts.txt', lines); toast('Downloaded');
+});
+
+/* =========================================================
+   INFO/ABOUT actions
+   ========================================================= */
+document.getElementById('exportAll').addEventListener('click', ()=>{
+  const dump=JSON.stringify(state,null,2); const blob=new Blob([dump],{type:'application/json;charset=utf-8'});
+  const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='gentle-shepherd-data.json'; document.body.appendChild(a); a.click();
+  setTimeout(()=>{a.remove(); URL.revokeObjectURL(url);},0); toast('Data exported');
+});
+document.getElementById('resetAll').addEventListener('click', ()=>{
+  const backup=JSON.stringify(state);
+  localStorage.removeItem(KEY);
+  Object.assign(state,{view:'home', musicOn:false, voice:{id:null,type:null,name:null,rate:0.95,pitch:1.0}, plans:[], flags:{red:{},green:{}}, truths:[], contacts:[]});
+  save(); renderAll();
+  const t=document.getElementById('toast'); t.innerHTML='App reset. <button class="btn tiny" id="undoReset">Undo</button>'; t.classList.add('show');
+  document.addEventListener('click', function handler(e){ if(e.target && e.target.id==='undoReset'){ try{ Object.assign(state, JSON.parse(backup)); save(); renderAll(); }catch(e){} t.classList.remove('show'); }}, {once:true});
+  setTimeout(()=>t.classList.remove('show'),5000);
+});
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+function downloadTxt(name, text){ const blob=new Blob([text||''],{type:'text/plain;charset=utf-8'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{a.remove(); URL.revokeObjectURL(url);},0); }
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+function renderAll(){
+  renderHome(); renderPlans(); renderFlags(); renderTruths(); renderContacts(); populateTruthPick(); // voice populated when opening voice screen
+  document.getElementById('musicBtn').setAttribute('aria-pressed', state.musicOn?'true':'false');
+  document.getElementById('musicIcon').textContent = state.musicOn ? '⏸' : '▶︎';
+  show(state.view||'home');
+}
+load();
+renderAll();
+</script>
+</body>
+</html>
